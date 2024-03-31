@@ -38,7 +38,7 @@ export interface CalendarHeaderProps {
   /** Hide month navigation arrows */
   hideArrows?: boolean;
   /** Replace default arrows with custom ones (direction can be 'left' or 'right') */
-  renderArrow?: (direction: Direction) => ReactNode;
+  renderArrow?: (direction: Direction, shouldDisable: boolean) => ReactNode;
   /** Handler which gets executed when press arrow icon left. It receive a callback can go back month */
   onPressArrowLeft?: (method: () => void, month?: XDate) => void; //TODO: replace with string
   /** Handler which gets executed when press arrow icon right. It receive a callback can go next month */
@@ -230,17 +230,17 @@ const CalendarHeader = forwardRef((props: CalendarHeaderProps, ref) => {
       
     return (
       <TouchableOpacity
-        onPress={onPress}
-        disabled={shouldDisable}
-        style={style.current.arrow}
-        hitSlop={hitSlop}
-        testID={`${testID}.${arrowId}`}
+      onPress={onPress}
+      disabled={shouldDisable}
+      style={style.current.arrow}
+      hitSlop={hitSlop}
+      testID={`${testID}.${arrowId}`}
       >
-        {renderArrow ? (
-          renderArrow(renderArrowDirection)
-        ) : (
-          <Image source={imageSource} style={shouldDisable ? style.current.disabledArrowImage : style.current.arrowImage}/>
-        )}
+      {renderArrow ? (
+        renderArrow(renderArrowDirection, shouldDisable) // Pass shouldDisable as a parameter
+      ) : (
+        <Image source={imageSource} style={shouldDisable ? style.current.disabledArrowImage : style.current.arrowImage}/>
+      )}
       </TouchableOpacity>
     );
   };
