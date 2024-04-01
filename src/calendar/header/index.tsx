@@ -38,7 +38,7 @@ export interface CalendarHeaderProps {
   /** Hide month navigation arrows */
   hideArrows?: boolean;
   /** Replace default arrows with custom ones (direction can be 'left' or 'right') */
-  renderArrow?: (direction: Direction, shouldDisable: boolean) => ReactNode;
+  renderArrow?: (direction: Direction, shouldDisable: boolean | undefined ) => ReactNode;
   /** Handler which gets executed when press arrow icon left. It receive a callback can go back month */
   onPressArrowLeft?: (method: () => void, month?: XDate) => void; //TODO: replace with string
   /** Handler which gets executed when press arrow icon right. It receive a callback can go next month */
